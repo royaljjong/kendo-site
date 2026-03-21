@@ -382,10 +382,10 @@ function HomePage({ posts }) {
               <h3><CreditCard size={20} /> 편리한 결제 수단</h3>
               <p>학부모님의 편의를 위해 다양한 결제 방식을 모두 지원합니다.</p>
               <div className="payment-grid">
-                <div><CreditCard size={18}/>모든 카드 결제</div>
-                <div><MapPin size={18}/>안성 지역화폐</div>
-                <div><Wallet size={18}/>제로페이</div>
-                <div><TrendingUp size={18}/>계좌 이체</div>
+                <div>모든 카드 결제</div>
+                <div>안성 지역화폐</div>
+                <div>제로페이</div>
+                <div>계좌 이체</div>
               </div>
             </article>
           </div>
