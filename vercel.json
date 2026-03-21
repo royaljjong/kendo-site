@@ -1,0 +1,4 @@
+{
+  "installCommand": "npx npm@10.9.2 install",
+  "buildCommand": "npm run build"
+}
