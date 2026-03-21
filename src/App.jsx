@@ -478,7 +478,7 @@ function AdminLoginPage({ setAdminUser, navigate }) {
         <h1>운영자 로그인</h1>
         <p>관장님 전용 관리 페이지입니다.</p>
         <label>
-          이메
+          이메일
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </label>
         <label>
