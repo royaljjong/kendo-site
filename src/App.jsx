@@ -463,7 +463,7 @@ function AdminLoginPage({ setAdminUser, navigate }) {
 
   const handleLogin = (event) => {
     event.preventDefault()
-    if (email === 'admin@kendo.com' && password === '1234') {
+    if (email === 'admin@kendo.com' && password === '09181214') {
       setAdminUser({ email, role: 'admin' })
       navigate('/admin/dashboard')
       return
@@ -478,11 +478,11 @@ function AdminLoginPage({ setAdminUser, navigate }) {
         <h1>운영자 로그인</h1>
         <p>관장님 전용 관리 페이지입니다.</p>
         <label>
-          이메일 (데모: admin@kendo.com)
+          이메
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </label>
         <label>
-          비밀번호 (데모: 1234)
+          비밀번호
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         </label>
         <button className="button button-dark full-width" type="submit">로그인</button>
