@@ -368,12 +368,12 @@ function HomePage({ posts }) {
           <div className="pricing-grid">
             <article className="price-panel dark-panel">
               <h3><Wallet size={20} /> 입관비 및 월 관비 안내</h3>
-              <p>입관비 및 도복/장비 비용은 별도 문의 바랍니다. 부서별 월 관비가 상이합니다.</p>
+              <p>입관비 및 도복/장비 비용은 별도 문의 바랍니다. 각 클래스별 가격대가 상이합니다.</p>
               <div className="inner-panel">
                 <h4>도장 할인 혜택</h4>
                 <ul>
-                  <li><CheckCircle2 size={16} /> 형제 / 남매 / 자매 동반 등록 시 할인</li>
-                  <li><CheckCircle2 size={16} /> 장기 등록 할인</li>
+                  <li><CheckCircle2 size={16} /> 형제 / 남매 / 자매 / 부모자녀 동반 등록 시 할인</li>
+                  <li><CheckCircle2 size={16} /> 장기 등록 할인 (3개월, 6개월, 9개월)</li>
                   <li><CheckCircle2 size={16} /> 특별 할인은 방문 상담 시 안내</li>
                 </ul>
               </div>
@@ -382,10 +382,10 @@ function HomePage({ posts }) {
               <h3><CreditCard size={20} /> 편리한 결제 수단</h3>
               <p>학부모님의 편의를 위해 다양한 결제 방식을 모두 지원합니다.</p>
               <div className="payment-grid">
-                <div>모든 카드 결제</div>
-                <div>안성 지역화폐</div>
-                <div>제로페이</div>
-                <div>계좌 이체</div>
+                <div><CreditCard size={18}/>모든 카드 결제</div>
+                <div><MapPin size={18}/>안성 지역화폐</div>
+                <div><Wallet size={18}/>제로페이</div>
+                <div><TrendingUp size={18}/>계좌 이체</div>
               </div>
             </article>
           </div>
