@@ -60,15 +60,28 @@ const INITIAL_POSTS = [
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState('/')
-  const [adminUser, setAdminUser] = useState(null)
+  const [adminUser, setAdminUser] = useState(() => {
+    const saved = localStorage.getItem('adminUser')
+    return saved ? JSON.parse(saved) : null
+  })
   const [members, setMembers] = useState(INITIAL_MEMBERS)
   const [tuitions, setTuitions] = useState(INITIAL_TUITIONS)
   const [posts, setPosts] = useState(INITIAL_POSTS)
+
+  const handleSetAdminUser = (user) => {
+    setAdminUser(user)
+    if (user) {
+      localStorage.setItem('adminUser', JSON.stringify(user))
+    } else {
+      localStorage.removeItem('adminUser')
+    }
+  }
 
   const navigate = (path) => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
     setCurrentPath(path)
   }
+// ... (omitting lines for brevity in this thought, will provide full replacement in act)
 
   const toggleMemberActive = (id) => {
     setMembers((prev) => prev.map((member) => (
@@ -144,11 +157,11 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <NavBar currentPath={currentPath} navigate={navigate} adminUser={adminUser} setAdminUser={setAdminUser} />
+      <NavBar currentPath={currentPath} navigate={navigate} adminUser={adminUser} setAdminUser={handleSetAdminUser} />
 
       <main>
         {currentPath === '/' && <HomePage posts={posts} />}
-        {currentPath === '/admin/login' && <AdminLoginPage setAdminUser={setAdminUser} navigate={navigate} />}
+        {currentPath === '/admin/login' && <AdminLoginPage adminUser={adminUser} setAdminUser={handleSetAdminUser} navigate={navigate} />}
         {currentPath === '/admin/dashboard' && adminUser && (
           <AdminDashboardPage
             members={members}
@@ -190,9 +203,20 @@ function NavBar({ currentPath, navigate, adminUser, setAdminUser }) {
 
         <div className="topbar-actions">
           {adminUser ? (
-            <button className="text-button" onClick={() => { setAdminUser(null); navigate('/') }}>
-              <LogOut size={16} /> 로그아웃
-            </button>
+            <>
+              {currentPath !== '/admin/dashboard' ? (
+                <button className="text-button" onClick={() => navigate('/admin/dashboard')}>
+                  <Lock size={16} /> 대시보드
+                </button>
+              ) : (
+                <button className="button button-secondary" onClick={() => navigate('/')}>
+                  홈페이지 보기
+                </button>
+              )}
+              <button className="text-button" onClick={() => { setAdminUser(null); navigate('/') }}>
+                <LogOut size={16} /> 로그아웃
+              </button>
+            </>
           ) : (
             <button className="text-button" onClick={() => navigate('/admin/login')}>
               <Lock size={16} /> 관리자
@@ -200,7 +224,6 @@ function NavBar({ currentPath, navigate, adminUser, setAdminUser }) {
           )}
 
           {isPublic && <a href="#contact" className="button button-primary">무료 체험 신청</a>}
-          {currentPath === '/admin/dashboard' && <button className="button button-secondary" onClick={() => navigate('/')}>홈페이지 보기</button>}
         </div>
       </div>
     </header>
@@ -457,9 +480,15 @@ function HomePage({ posts }) {
   )
 }
 
-function AdminLoginPage({ setAdminUser, navigate }) {
+function AdminLoginPage({ adminUser, setAdminUser, navigate }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  React.useEffect(() => {
+    if (adminUser) {
+      navigate('/admin/dashboard')
+    }
+  }, [adminUser, navigate])
 
   const handleLogin = (event) => {
     event.preventDefault()
